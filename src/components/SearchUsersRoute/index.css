@@ -1,0 +1,61 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}
+.search-page-container{
+    height: 100vh;
+}
+.top-serach-container{
+    margin: 20px;
+    display: flex;
+    align-items: center;
+}
+.left-arrow{
+    cursor: pointer;
+    width: 40px;
+   
+}
+.search-container{
+    background-color: azure;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    width:80%;
+    border-radius: 12px;
+}
+
+.search-icon{
+    font-size: 2em;
+    margin-right: 10px;
+}
+.custom-search{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+}
+.profile-logo{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color:#fff;
+    margin-right: 10px;
+}
+.profile-description{
+    background-color: aliceblue;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+    border-radius: 12px;
+}
+.profile-name{
+    font-size: 1.2em;
+    font-weight: 500;
+
+}

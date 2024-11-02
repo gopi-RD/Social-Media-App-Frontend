@@ -1,0 +1,102 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}
+.create-post-container{
+    background-color: #f2f2f2;
+    height: 100vh;
+}
+.new-post-container{
+    width: 100%;
+    background-color:white;
+    border-radius: 10px;
+    padding: 20px;
+}
+.cancal-container{
+   display: flex;
+   align-items: center;
+   color: #000;
+}
+.cancel-img{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.cancel-img:hover{
+    background-color:rgb(215, 250, 220);
+    border-radius: 12px;
+    
+}
+.new-post-text{
+    font-size: 24px;
+    font-weight: bold;
+}
+.create-post-description{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:500px;
+    
+
+}
+.form-post-container{
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 10px;
+    
+}
+.add-post-text{
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+}
+.caption-label{
+    margin-top: 10px;
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 5px;
+
+}
+.textarea-input{
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: #000;
+    font-size: 18px;
+}
+.preview-image{
+    width: 150px;
+    height: 140px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.add-post-btn{
+    background-color: #1619a7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    margin-top: 20px;
+}
+
+.add-post-btn:hover{
+    background-color: #0f1282;
+    border: 2px dashed #fff;
+}
+.error-text{
+    color: red;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.error-input-border{
+    border: 1px solid red;
+}
