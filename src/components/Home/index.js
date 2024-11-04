@@ -22,12 +22,11 @@ const Home=(props)=>{
    
 
 
-    const onUpdateLikeStatus=(id)=>{
+    const onUpdateLikeStatus=  (id)=>{
        const data={
         id:id,
        }
-        dispatch(likePost(data))
-        dispatch(getPosts())
+        dispatch(likePost(data)) 
     }
 
     

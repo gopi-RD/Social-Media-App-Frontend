@@ -79,3 +79,8 @@
 .cross-img:hover{
     background-color: #f2f2f2;
 }
+.no-comment-found{
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+}

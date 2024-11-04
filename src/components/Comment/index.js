@@ -47,8 +47,8 @@ const Comment=(props)=>{
     
     useEffect(()=>{
         // Fetch comments for the post
-        dispatch(getComments())
-    },[dispatch])
+        dispatch(getComments(postId))
+    },[dispatch,postId])
 
     const onChangeComment=(e)=>{
         setCommentText(e.target.value)
@@ -61,7 +61,6 @@ const Comment=(props)=>{
             postId
         }
         dispatch(postComment(data))
-        dispatch(getComments())
        setCommentText("")
     }
 
@@ -81,10 +80,8 @@ const Comment=(props)=>{
                 <ul className="comment-list-items">
                         {
                             comments.length>0 ? (
-                                    comments.map(arr=>(
-                                        arr.comments.map(comment=>{
-                                            return (
-                                            <li className="comment-item-container" key={comment.id}>
+                                    comments.map(comment=>(
+                                        <li className="comment-item-container" key={comment.id}>
                                             <div className="comment-profile">
                                                 <p>{comment.username.slice(0,1).toUpperCase()}</p>
                                             </div>
@@ -93,13 +90,9 @@ const Comment=(props)=>{
                                                  <p className="comment-text">{comment.commentText}</p>
                                             </div>
                                             </li>
-                                        )
-                                            
-
-                                        })
                                     ))
                             ) :(
-                                <p>No comments yet</p>
+                                <p className="no-comment-found">No comments yet</p>
                             )
                         }
                 </ul>

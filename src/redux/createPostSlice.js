@@ -124,7 +124,7 @@ export const createPost = createAsyncThunk(
       const {id} = data;
       const url = `https://social-media-app-backend-rxyp.onrender.com/api/posts/${id}/like`;
       const options = {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token
@@ -133,8 +133,8 @@ export const createPost = createAsyncThunk(
   
       try {
         const response = await fetch(url, options);
-         await response.json();
-        //console.log(result)
+         const result=await response.json();
+        console.log(result)
       } catch (error) {
         console.log(error);
       }
@@ -246,8 +246,8 @@ export const createPost = createAsyncThunk(
 
   export const getComments = createAsyncThunk(
     "getProfile",
-    async (data, {dispatch}) => {
-      const url="https://social-media-app-backend-rxyp.onrender.com/api/posts"
+    async (postId, {dispatch}) => {
+      const url=`https://social-media-app-backend-rxyp.onrender.com/api/posts/${postId}`
       const options={
           method: "GET",
           headers: {
@@ -259,15 +259,13 @@ export const createPost = createAsyncThunk(
     try {
       const response = await fetch(url, options);
       const result =  await response.json();
-      const updatedData=result.posts.map(post=>({
-         comments:post.comments.map(comment=>({
+      
+         const updatedData=result.post.comments.map(comment=>({
           commentText: comment.commentText,
           username: comment.userId.username,
           createdAt: comment.createdAt,
           id:comment._id,
         }))
-       
-    })) 
         console.log(updatedData)
         dispatch(getAllComments(updatedData))
       } catch (error) {
