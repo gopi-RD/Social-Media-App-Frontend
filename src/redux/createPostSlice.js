@@ -34,7 +34,7 @@ export const createPostSlice = createSlice({
     },
     getAllComments:(state,action)=>{
       state.comments=action.payload
-    }
+    },
   },
 })
 

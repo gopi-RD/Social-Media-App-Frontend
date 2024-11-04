@@ -3,8 +3,10 @@ import "./index.css"
 const PostItem=(props)=>{
     const {postDetails,onUpdateLikeStatus,onUpdateComments}=props 
     const {id,content,imageUrl,isLiked,username}=postDetails 
+
+
     const onChangeLike= async ()=>{
-       onUpdateLikeStatus(id)
+      onUpdateLikeStatus(id)
    }
     const onCommentButton=()=>{
        onUpdateComments(id)
