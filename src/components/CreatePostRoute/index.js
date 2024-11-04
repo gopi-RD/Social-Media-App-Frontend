@@ -57,10 +57,14 @@ const CreatePostRoute=(props)=>{
         setIsPreview(false)
         setIsCaptionErr(false)
         setIsImageErr(false)
-        props.history.push('/')
+       props.history.push('/')
 
 
 
+    }
+
+    const onCancelPostRoute=()=>{
+        props.history.goBack();
     }
 
    
@@ -69,7 +73,7 @@ const CreatePostRoute=(props)=>{
         <div className="create-post-container">
             <div className="new-post-container">
                 <div className="cancal-container">
-                    <img src="https://img.icons8.com/?size=100&id=79023&format=png&color=000000" className="cancel-img" alt="cancel"/> 
+                    <img src="https://img.icons8.com/?size=100&id=79023&format=png&color=000000" className="cancel-img" alt="cancel" onClick={onCancelPostRoute} /> 
                     <h2 className="new-post-text">New Post</h2>
                 </div>
             </div>
@@ -82,7 +86,7 @@ const CreatePostRoute=(props)=>{
                     <input type="file" accept="image/*" onChange={onAddImagePost} /> 
                     {isImageErr && <p className="error-text">*Required</p>}
                     <label className="caption-label">Caption</label>
-                    <textarea className= {`textarea-input ${isCaptionErr && "error-input-border"}`} type="text" cols="20" rows="5" placeholder="Enter a Post Caption" onChange={onAddCaptionText}>
+                    <textarea className= {`textarea-input ${isCaptionErr && "error-input-border"}`} value={caption} type="text" cols="20" rows="5" placeholder="Enter a Post Caption" onChange={onAddCaptionText}>
                     </textarea>
                     {isCaptionErr && <p className="error-text">*Required</p>}
                     <button className="add-post-btn" type="submit">

@@ -10,7 +10,9 @@ export const createPostSlice = createSlice({
       postList:[],
       loading: false,
       error:null,
-      searchData: []
+      searchData: [],
+      profileData:{},
+      comments:[],
   },
   reducers:{
     postLoading:(state)=>{
@@ -26,21 +28,27 @@ export const createPostSlice = createSlice({
     },
     searchUsers:(state,action)=>{
       state.searchData=action.payload
+    },
+    getProfileData:(state,action)=>{
+      state.profileData=action.payload
+    },
+    getAllComments:(state,action)=>{
+      state.comments=action.payload
     }
-}
+  },
+})
 
- 
-});
 
-export const {postLoading,postData,postError,searchUsers} = createPostSlice.actions;
+
+export const {postLoading,postData,postError,searchUsers,getProfileData,getAllComments} = createPostSlice.actions;
 
 // Add New Post 
 
 
 export const createPost = createAsyncThunk(
     "createPost",
-    async (data, { rejectWithValue }) => {
-      console.log("data", data);
+    async (data) => {
+      console.log(data);
       const url="https://social-media-app-backend-rxyp.onrender.com/api/posts"
         const options={
             method: "POST",
@@ -54,9 +62,9 @@ export const createPost = createAsyncThunk(
       try {
         const response = await fetch(url, options);
         const result = await response.json();
-        return result;
+        console.log(result);
       } catch (error) {
-        return rejectWithValue(error);
+        console.log(error);
       }
     }
   );
@@ -94,7 +102,8 @@ export const createPost = createAsyncThunk(
           likesCount:post.likesCount,
           isLiked:post.likes.map(eachItem=>(
              eachItem._id.includes(post.userId._id)
-          ))
+          )),
+          comments:post.comments
       }))
       
         console.log(updatedData)
@@ -124,21 +133,21 @@ export const createPost = createAsyncThunk(
   
       try {
         const response = await fetch(url, options);
-        const result = await response.json();
-        console.log(result)
+         await response.json();
+        //console.log(result)
       } catch (error) {
         console.log(error);
       }
     }
   );
 
-  // Search Users
+  // get All Users
 
   export const getUsers = createAsyncThunk(
     "getUsers",
     async (searchText, {dispatch}) => {
       dispatch(postLoading());
-      const url=`https://social-media-app-backend-rxyp.onrender.com/api/users/search?search=${searchText}`
+      const url=`https://social-media-app-backend-rxyp.onrender.com/api/users`
         const options={
             method: "GET",
             headers: {
@@ -146,7 +155,6 @@ export const createPost = createAsyncThunk(
                 Authorization: "Bearer " + token
             }
         }
-  
       try {
         const response = await fetch(url, options);
         const result =  await response.json();
@@ -164,11 +172,105 @@ export const createPost = createAsyncThunk(
             )) */
           }))
 
-        console.log(updatedData)
+        //console.log(updatedData)
         dispatch(searchUsers(updatedData));
         
       } catch (error) {
-        //dispatch(postError(error));
+        console.log(error);
+      }
+    }
+  );
+  
+  // profile of user
+
+  export const getProfile = createAsyncThunk(
+    "getProfile",
+    async (data, {dispatch}) => {
+      const url=`https://social-media-app-backend-rxyp.onrender.com/api/profile`
+        const options={
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token
+            }
+        }
+  
+      try {
+        const response = await fetch(url, options);
+        const result =  await response.json();
+        const updatedData={
+            id:result._id,
+            username:result.username,
+            email:result.email,
+            postsCount:result.posts.length,
+            createdAt:result.createdAt,
+            followers:result.followers,
+            following:result.following,
+           /* isFollowing:user.following.map(eachItem=>(
+               eachItem._id.includes(userId)
+            )) */
+           }
+          // console.log(updatedData,"ok")  
+        dispatch(getProfileData(updatedData))
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+  
+
+  export const postComment = createAsyncThunk(
+    "posts/likePost",
+    async (data, {dispatch }) => {
+      const {commentText,postId} = data;
+      console.log(commentText , postId);
+      const url = `https://social-media-app-backend-rxyp.onrender.com/api/comments`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token
+        },
+        body: JSON.stringify(data)
+      };
+  
+      try {
+        const response = await fetch(url, options);
+         await response.json();
+        //console.log(result)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+
+  export const getComments = createAsyncThunk(
+    "getProfile",
+    async (data, {dispatch}) => {
+      const url="https://social-media-app-backend-rxyp.onrender.com/api/posts"
+      const options={
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+          }
+      }
+
+    try {
+      const response = await fetch(url, options);
+      const result =  await response.json();
+      const updatedData=result.posts.map(post=>({
+         comments:post.comments.map(comment=>({
+          commentText: comment.commentText,
+          username: comment.userId.username,
+          createdAt: comment.createdAt,
+          id:comment._id,
+        }))
+       
+    })) 
+        console.log(updatedData)
+        dispatch(getAllComments(updatedData))
+      } catch (error) {
         console.log(error);
       }
     }
@@ -177,17 +279,13 @@ export const createPost = createAsyncThunk(
 
 
 
-
-
 /*export const toggleLike = (postId,userId,like) => ({
     type: 'TOGGLE_LIKE',
     payload: {postId,userId,like}
+
   });
-
-
-  */
+  */ 
   
-
 export default createPostSlice;
 
  

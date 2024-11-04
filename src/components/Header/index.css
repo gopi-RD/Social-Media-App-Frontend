@@ -23,7 +23,12 @@
     font-size: 28px;
     color:#fff;
 }
-
+@media (max-width:767px) {
+    .website-logo{
+        font-size:20px;
+    }
+    
+}
 .website-logo:hover{
     color:  rgb(48, 116, 206);
 }
@@ -54,7 +59,13 @@
     padding: 12px 24px 12px 24px;
     margin-right: 20px;
 }
-
+@media (max-width: 767px) {
+    .login-button{
+        font-size:16px;
+        padding: 6px 12px 6px 12px;
+        margin-right: 3px;
+    }
+}
 .login-button:hover{
     background-color: #45a049;
     border:1px dashed #fff;
@@ -70,6 +81,13 @@
     font-size: 18px;
     border-radius: 12px;
     padding: 12px 24px 12px 24px;
+}
+
+@media (max-width: 767px) {
+    .sign-up-button{
+        font-size:16px;
+        padding: 6px 12px 6px 12px;
+    }
 }
 
 .sign-up-button:hover{

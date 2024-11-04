@@ -5,6 +5,8 @@ import LoginRoute from './components/LoginRoute';
 import CreatePostRoute from './components/CreatePostRoute';
 import SearchUsersRoute from './components/SearchUsersRoute'; 
 import ProtectedRoute from './components/ProtectedRoute';
+import ProfileRoute from './components/ProfileRoute';  
+//import Comment from './components/Comment';  
 
 import './App.css';
 
@@ -17,6 +19,8 @@ const App=()=>{
         <ProtectedRoute exact path="/" component={Home}/>
         <ProtectedRoute exact path="/create-post" component={CreatePostRoute}/> 
         <ProtectedRoute exact path="/search-users" component={SearchUsersRoute}/>
+        <ProtectedRoute exact path="/profile" component={ProfileRoute}/>
+       {/*<Route path="/comment" component={Comment} /> */}
       </Switch>
     </BrowserRouter>
   )
